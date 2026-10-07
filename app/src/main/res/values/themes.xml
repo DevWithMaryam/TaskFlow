@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Main app theme. Light/Dark ke colors values-night/colors.xml se khud aate hain -->
+    <style name="Base.Theme.TaskFlow" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/tf_primary</item>
+        <item name="colorOnPrimary">@color/tf_on_primary</item>
+        <item name="colorSurface">@color/tf_surface</item>
+        <item name="colorOnSurface">@color/tf_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/tf_on_surface_variant</item>
+        <item name="colorOutline">@color/tf_surface_stroke</item>
+        <item name="android:windowBackground">@color/tf_background</item>
+
+        <!-- Poori app ka default font Inter -->
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="fontFamily">@font/inter_regular</item>
+    </style>
+
+    <style name="Theme.TaskFlow" parent="Base.Theme.TaskFlow" />
+
+    <!-- App kholte waqt system ka splash: sirf teal background, icon nahi -->
+    <style name="Theme.TaskFlow.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/tf_splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@android:color/transparent</item>
+        <item name="postSplashScreenTheme">@style/Theme.TaskFlow</item>
+    </style>
+</resources>

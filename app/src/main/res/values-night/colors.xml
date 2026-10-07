@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tf_primary">#2E7777</color>
+    <color name="tf_on_primary">#FFFFFF</color>
+
+    <color name="tf_background">#2F2F2F</color>
+    <color name="tf_surface">#0F0F0F</color>
+    <color name="tf_surface_stroke">#3A3A3A</color>
+    <color name="tf_on_surface">#FFFFFF</color>
+    <color name="tf_on_surface_variant">#B5B5B5</color>
+
+    <color name="tf_nav_background">#000000</color>
+    <color name="tf_nav_icon">#FFFFFF</color>
+
+    <color name="tf_priority_low">#B8A58C</color>
+    <color name="tf_priority_medium">#C98A2E</color>
+    <color name="tf_priority_high">#B30000</color>
+    <color name="tf_on_priority">#FFFFFF</color>
+
+    <color name="tf_splash_background">#2E7777</color>
+</resources>

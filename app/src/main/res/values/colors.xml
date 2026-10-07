@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Brand -->
+    <color name="tf_primary">#2E7777</color>
+    <color name="tf_on_primary">#FFFFFF</color>
+
+    <!-- Screens and cards -->
+    <color name="tf_background">#FFFFFF</color>
+    <color name="tf_surface">#FFFFFF</color>
+    <color name="tf_surface_stroke">#DCE6E6</color>
+    <color name="tf_on_surface">#111111</color>
+    <color name="tf_on_surface_variant">#6B7777</color>
+
+    <!-- Bottom navigation -->
+    <color name="tf_nav_background">#F1F5F5</color>
+    <color name="tf_nav_icon">#111111</color>
+
+    <!-- Priority chips -->
+    <color name="tf_priority_low">#FDE3C3</color>
+    <color name="tf_priority_medium">#F4A94E</color>
+    <color name="tf_priority_high">#F25555</color>
+    <color name="tf_on_priority">#1A1A1A</color>
+
+    <!-- Splash -->
+    <color name="tf_splash_background">#2E7777</color>
+
+    <color name="tf_splash_ring_outer">#14FFFFFF</color>
+    <color name="tf_splash_ring_inner">#1FFFFFFF</color>
+
+    <color name="tf_accent_sun">#F5C542</color>
+
+</resources>

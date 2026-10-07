@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false">
+
+    <LinearLayout
+        android:id="@+id/navBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="@color/tf_nav_background"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/nav_home"
+            android:padding="18dp"
+            android:src="@drawable/ic_home"
+            app:tint="@color/tf_nav_icon" />
+
+        <ImageButton
+            android:id="@+id/navCategories"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/nav_categories"
+            android:padding="18dp"
+            android:src="@drawable/ic_categories"
+            app:tint="@color/tf_nav_icon" />
+
+        <!-- Beech ki jagah + button ke liye -->
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/navFilter"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/nav_filter"
+            android:padding="18dp"
+            android:src="@drawable/ic_filter"
+            app:tint="@color/tf_nav_icon" />
+
+        <ImageButton
+            android:id="@+id/navSettings"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/nav_settings"
+            android:padding="18dp"
+            android:src="@drawable/ic_settings"
+            app:tint="@color/tf_nav_icon" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:contentDescription="@string/nav_add_task"
+        app:backgroundTint="@color/tf_primary"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.TaskFlow.Circle"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/tf_on_primary" />
+</FrameLayout>

@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">TaskFlow</string>
+    <string name="splash_tagline">Organize your day, one task at a time.</string>
+
+    <!-- Common -->
+    <string name="back">Back</string>
+    <string name="search">Search</string>
+    <string name="more_options">More options</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="exit">Exit</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_categories">Categories</string>
+    <string name="nav_add_task">Add task</string>
+    <string name="nav_filter">Filter</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Home (placeholder texts, Phase 7 ma dynamic hongay) -->
+    <string name="greeting_morning">Good Morning</string>
+    <string name="home_subtitle_placeholder">Today you have 0 tasks</string>
+    <string name="today">Today</string>
+    <string name="planned">Planned</string>
+    <string name="tasks_placeholder">0 tasks</string>
+    <string name="exit_title">Exit TaskFlow?</string>
+    <string name="exit_message">Are you sure you want to close the app?</string>
+
+    <!-- Task list -->
+    <string name="default_list_title">Tasks</string>
+    <string name="empty_tasks_title">No tasks yet</string>
+    <string name="empty_tasks_message">Tasks you add will show up here.</string>
+
+    <!-- Categories -->
+    <string name="categories_title">Categories</string>
+    <string name="empty_categories_title">No categories yet</string>
+    <string name="empty_categories_message">Add a category first to organize your tasks.</string>
+    <string name="add_category">Add Category</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_feedback">Feedback</string>
+    <string name="settings_share">Share App</string>
+
+    <!-- Add task -->
+    <string name="add_task_title">Add Task</string>
+    <string name="hint_task_title">Add your task</string>
+    <string name="hint_description">Description (optional)</string>
+    <string name="hint_category">Select category</string>
+    <string name="label_priority">Priority</string>
+    <string name="priority_low">Low</string>
+    <string name="priority_medium">Medium</string>
+    <string name="priority_high">High</string>
+    <string name="hint_due_date">Due date (optional)</string>
+    <string name="pick_date">Pick a date</string>
+</resources>
