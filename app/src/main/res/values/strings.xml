@@ -9,6 +9,8 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="exit">Exit</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 
     <!-- Bottom navigation -->
     <string name="nav_home">Home</string>
@@ -36,6 +38,22 @@
     <string name="empty_categories_title">No categories yet</string>
     <string name="empty_categories_message">Add a category first to organize your tasks.</string>
     <string name="add_category">Add Category</string>
+    <string name="edit_category">Edit Category</string>
+    <string name="category_name_hint">Category name</string>
+    <string name="error_name_empty">Please enter a name</string>
+    <string name="error_name_exists">A category with this name already exists</string>
+    <string name="delete_category_title">Delete Category?</string>
+    <string name="delete_category_message_empty">Are you sure you want to delete this category?</string>
+
+    <plurals name="tasks_count">
+        <item quantity="one">%d task</item>
+        <item quantity="other">%d tasks</item>
+    </plurals>
+
+    <plurals name="delete_category_message">
+        <item quantity="one">This category contains %d task. The task will not be deleted.</item>
+        <item quantity="other">This category contains %d tasks. The tasks will not be deleted.</item>
+    </plurals>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>

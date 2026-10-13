@@ -45,6 +45,10 @@
             android:name="title"
             android:defaultValue="Tasks"
             app:argType="string" />
+        <argument
+            android:name="categoryId"
+            android:defaultValue="-1L"
+            app:argType="long" />
     </fragment>
 
     <fragment
