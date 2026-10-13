@@ -84,4 +84,14 @@
     <string name="task_deleted">Task deleted</string>
     <string name="undo">UNDO</string>
 
+    <string name="greeting_afternoon">Good Afternoon</string>
+    <string name="greeting_evening">Good Evening</string>
+    <string name="greeting_night">Good Night</string>
+    <string name="home_no_categories">No categories yet. Add one from the Categories tab.</string>
+
+    <plurals name="today_subtitle">
+        <item quantity="one">Today you have %d task</item>
+        <item quantity="other">Today you have %d tasks</item>
+    </plurals>
+
 </resources>

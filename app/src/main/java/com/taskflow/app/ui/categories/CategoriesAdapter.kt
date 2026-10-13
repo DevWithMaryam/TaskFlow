@@ -13,7 +13,7 @@ import com.taskflow.app.databinding.ItemHomeRowBinding
 
 class CategoriesAdapter(
     private val onClick: (CategoryWithCount) -> Unit,
-    private val onMoreClick: (View, CategoryWithCount) -> Unit
+    private val onMoreClick: ((View, CategoryWithCount) -> Unit)? = null
 ) : ListAdapter<CategoryWithCount, CategoriesAdapter.ViewHolder>(DiffCallback) {
 
     inner class ViewHolder(private val binding: ItemHomeRowBinding) :
@@ -25,9 +25,13 @@ class CategoriesAdapter(
             tvCount.text = root.resources.getQuantityString(
                 R.plurals.tasks_count, item.taskCount, item.taskCount
             )
-            btnMore.isVisible = true
             root.setOnClickListener { onClick(item) }
-            btnMore.setOnClickListener { onMoreClick(it, item) }
+
+            val moreClick = onMoreClick
+            btnMore.isVisible = moreClick != null
+            btnMore.setOnClickListener(
+                if (moreClick != null) View.OnClickListener { moreClick(it, item) } else null
+            )
         }
     }
 
