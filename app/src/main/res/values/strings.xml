@@ -73,4 +73,9 @@
     <string name="priority_high">High</string>
     <string name="hint_due_date">Due date (optional)</string>
     <string name="pick_date">Pick a date</string>
+
+    <string name="task_added">Task added</string>
+    <string name="error_title_required">Please enter a task title</string>
+    <string name="error_category_required">Please select a category</string>
+    <string name="clear_date">Clear date</string>
 </resources>

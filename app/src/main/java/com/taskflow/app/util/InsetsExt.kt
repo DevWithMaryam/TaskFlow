@@ -18,14 +18,15 @@ fun View.applyStatusBarPadding() {
     ViewCompat.requestApplyInsets(this)
 }
 
-/** View ke neeche navigation/gesture bar jitni jagah (padding) add karta hai. */
+/** View ke neeche navigation/gesture bar ya keyboard (jo bara ho) jitni jagah add karta hai. */
 fun View.applyNavigationBarPadding() {
     val initialBottom = paddingBottom
     ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
         val bars = insets.getInsets(
             WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
         )
-        v.updatePadding(bottom = initialBottom + bars.bottom)
+        val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
+        v.updatePadding(bottom = initialBottom + maxOf(bars.bottom, ime.bottom))
         insets
     }
     ViewCompat.requestApplyInsets(this)
