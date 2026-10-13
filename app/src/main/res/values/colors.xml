@@ -32,4 +32,6 @@
 
     <color name="tf_accent_sun">#F5C542</color>
 
+    <color name="tf_delete">#D93025</color>
+
 </resources>

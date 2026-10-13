@@ -78,4 +78,10 @@
     <string name="error_title_required">Please enter a task title</string>
     <string name="error_category_required">Please select a category</string>
     <string name="clear_date">Clear date</string>
+
+    <string name="edit_task_title">Edit Task</string>
+    <string name="task_updated">Task updated</string>
+    <string name="task_deleted">Task deleted</string>
+    <string name="undo">UNDO</string>
+
 </resources>

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.taskflow.app.R
 import com.taskflow.app.databinding.FragmentHomeBinding
+import com.taskflow.app.ui.tasklist.TaskListArgs
 import com.taskflow.app.util.applyNavigationBarPadding
 import com.taskflow.app.util.applyStatusBarPadding
 
@@ -39,14 +40,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             )
             tvTitle.setText(R.string.today)
             tvCount.setText(R.string.tasks_placeholder)
-            root.setOnClickListener { openTaskList(getString(R.string.today)) }
+            root.setOnClickListener {
+                openTaskList(getString(R.string.today), TaskListArgs.TYPE_TODAY)
+            }
         }
 
         binding.rowPlanned.apply {
             ivIcon.setImageResource(R.drawable.ic_planned)
             tvTitle.setText(R.string.planned)
             tvCount.setText(R.string.tasks_placeholder)
-            root.setOnClickListener { openTaskList(getString(R.string.planned)) }
+            root.setOnClickListener {
+                openTaskList(getString(R.string.planned), TaskListArgs.TYPE_PLANNED)
+            }
         }
     }
 
@@ -66,10 +71,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
-    private fun openTaskList(title: String) {
+    private fun openTaskList(title: String, type: String) {
         findNavController().navigate(
             R.id.action_home_to_taskList,
-            bundleOf("title" to title)
+            bundleOf(
+                TaskListArgs.TITLE to title,
+                TaskListArgs.TYPE to type
+            )
         )
     }
 

@@ -46,9 +46,16 @@
             android:defaultValue="Tasks"
             app:argType="string" />
         <argument
+            android:name="listType"
+            android:defaultValue="category"
+            app:argType="string" />
+        <argument
             android:name="categoryId"
             android:defaultValue="-1L"
             app:argType="long" />
+        <action
+            android:id="@+id/action_taskList_to_addTask"
+            app:destination="@id/addTaskFragment" />
     </fragment>
 
     <fragment
@@ -72,6 +79,10 @@
         android:name="com.taskflow.app.ui.addtask.AddTaskFragment"
         android:label="Add Task"
         tools:layout="@layout/fragment_add_task">
+        <argument
+            android:name="taskId"
+            android:defaultValue="-1L"
+            app:argType="long" />
         <action
             android:id="@+id/action_addTask_to_categories"
             app:destination="@id/categoriesFragment" />

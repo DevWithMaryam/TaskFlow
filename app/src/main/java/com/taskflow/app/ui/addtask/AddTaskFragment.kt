@@ -27,6 +27,7 @@ import com.taskflow.app.util.applyStatusBarPadding
 import com.taskflow.app.viewmodel.AddTaskViewModel
 import kotlinx.coroutines.launch
 
+/** Naya task banane aur purana task edit karne, dono ke liye. */
 class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
 
     private var _binding: FragmentAddTaskBinding? = null
@@ -35,15 +36,19 @@ class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
     private val viewModel: AddTaskViewModel by viewModels { AddTaskViewModel.Factory }
 
     private var categories: List<Category> = emptyList()
+    private var categoriesLoaded = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentAddTaskBinding.bind(view)
+        categoriesLoaded = false
 
         binding.header.root.applyStatusBarPadding()
         binding.root.applyNavigationBarPadding()
 
-        binding.header.tvTitle.setText(R.string.add_task_title)
+        binding.header.tvTitle.setText(
+            if (viewModel.isEditing) R.string.edit_task_title else R.string.add_task_title
+        )
         binding.header.tvAction.isVisible = true
         binding.header.tvAction.setOnClickListener { save() }
         binding.header.btnBack.setOnClickListener { findNavController().navigateUp() }
@@ -57,6 +62,32 @@ class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
         setupCategoryDropdown()
         setupDueDate()
         observeCategories()
+        observeLoadedTask()
+    }
+
+    // ---------- Edit: purane task se form bharna ----------
+
+    private fun observeLoadedTask() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.loadedTask.collect { task ->
+                    if (task == null || viewModel.prefillDone) return@collect
+                    viewModel.prefillDone = true
+
+                    binding.etTitle.setText(task.title)
+                    binding.etDescription.setText(task.description.orEmpty())
+                    binding.chipGroupPriority.check(
+                        when (task.priority) {
+                            Priority.LOW -> R.id.chipLow
+                            Priority.MEDIUM -> R.id.chipMedium
+                            Priority.HIGH -> R.id.chipHigh
+                        }
+                    )
+                    updateDueDateUi()
+                    updateCategoryField()
+                }
+            }
+        }
     }
 
     // ---------- Category dropdown ----------
@@ -72,24 +103,30 @@ class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.categories.collect { list ->
+                    if (list == null) return@collect   // abhi load ho rahi hain
                     categories = list
-                    val hasCategories = list.isNotEmpty()
+                    categoriesLoaded = true
 
                     // Category na hon to dropdown ki jagah "Add a category first" dikhao
+                    val hasCategories = list.isNotEmpty()
                     binding.tilCategory.isVisible = hasCategories
                     binding.layoutNoCategory.isVisible = !hasCategories
 
                     binding.actCategory.setAdapter(
                         NoFilterArrayAdapter(requireContext(), list.map { it.name })
                     )
-
-                    // Pehle chuni hui category ab bhi maujood hai? (delete na hui ho)
-                    val selected = list.firstOrNull { it.id == viewModel.selectedCategoryId }
-                    viewModel.selectedCategoryId = selected?.id
-                    binding.actCategory.setText(selected?.name.orEmpty(), false)
+                    updateCategoryField()
                 }
             }
         }
+    }
+
+    /** Chuni hui category ka naam dikhao. Agar woh delete ho gayi ho to hata do. */
+    private fun updateCategoryField() {
+        if (!categoriesLoaded) return
+        val selected = categories.firstOrNull { it.id == viewModel.selectedCategoryId }
+        viewModel.selectedCategoryId = selected?.id
+        binding.actCategory.setText(selected?.name.orEmpty(), false)
     }
 
     // ---------- Due date ----------
@@ -119,9 +156,12 @@ class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
             .setValidator(DateValidatorPointForward.from(DateUtils.toPickerSelection(today)))
             .build()
 
+        // Purani (guzri hui) date ho to picker aaj se shuru ho
+        val current = viewModel.dueDate?.takeIf { it >= today } ?: today
+
         val picker = MaterialDatePicker.Builder.datePicker()
             .setTitleText(R.string.pick_date)
-            .setSelection(DateUtils.toPickerSelection(viewModel.dueDate ?: today))
+            .setSelection(DateUtils.toPickerSelection(current))
             .setCalendarConstraints(constraints)
             .build()
 
@@ -176,7 +216,8 @@ class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
 
             if (!errors.hasErrors) {
                 ViewCompat.getWindowInsetsController(b.root)?.hide(WindowInsetsCompat.Type.ime())
-                Toast.makeText(requireContext(), R.string.task_added, Toast.LENGTH_SHORT).show()
+                val message = if (viewModel.isEditing) R.string.task_updated else R.string.task_added
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 findNavController().navigateUp()
             }
         }
