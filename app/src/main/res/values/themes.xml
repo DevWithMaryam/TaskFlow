@@ -13,12 +13,27 @@
         <item name="colorSurfaceContainerLow">@color/tf_surface</item>
         <item name="android:windowBackground">@color/tf_background</item>
 
-        <!-- Poori app ka default font Inter -->
-        <item name="android:fontFamily">@font/inter_regular</item>
-        <item name="fontFamily">@font/inter_regular</item>
+        <!-- Dialogs ke buttons dark mode ma bhi saaf parhe jayen -->
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.TaskFlow.Dialog</item>
+
+        <!-- Inter: Material ke text sizes ke zariye (theme ka fontFamily nahi) -->
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.TaskFlow.Inter.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.TaskFlow.Inter.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.TaskFlow.Inter.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.TaskFlow.Inter.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.TaskFlow.Inter.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.TaskFlow.Inter.LabelSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.TaskFlow.Inter.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.TaskFlow.Inter.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.TaskFlow.Inter.TitleSmall</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.TaskFlow.Inter.HeadlineSmall</item>
     </style>
 
     <style name="Theme.TaskFlow" parent="Base.Theme.TaskFlow" />
+
+    <style name="ThemeOverlay.TaskFlow.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorPrimary">@color/tf_dialog_accent</item>
+    </style>
 
     <!-- App kholte waqt system ka splash: sirf teal background, icon nahi -->
     <style name="Theme.TaskFlow.Starting" parent="Theme.SplashScreen">

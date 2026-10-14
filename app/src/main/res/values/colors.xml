@@ -38,4 +38,6 @@
     <color name="tf_secondary_container">#CDE7E7</color>
     <color name="tf_on_secondary_container">#0B2F2F</color>
 
+    <color name="tf_dialog_accent">#2E7777</color>
+
 </resources>

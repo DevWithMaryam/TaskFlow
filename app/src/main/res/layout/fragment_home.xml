@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/tf_background">
 
-    <!-- Sab se peechay: illustration -->
+    <!-- 1. Illustration: poori screen ke beech ma, sab se peechay -->
     <ImageView
         android:id="@+id/imgIllustration"
         android:layout_width="0dp"
@@ -14,13 +14,24 @@
         android:contentDescription="@null"
         android:importantForAccessibility="no"
         android:src="@drawable/img_desk_illustration"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="H,1080:591"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- 2. Teal curve: cards ke peechay -->
+    <View
+        android:id="@+id/headerBackdrop"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:background="@drawable/bg_header"
+        android:importantForAccessibility="no"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 3. List -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -73,6 +84,7 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <!-- 4. Title ki jagah (transparent, teal curve ke upar) -->
     <LinearLayout
         android:id="@+id/header"
         style="@style/Widget.TaskFlow.Header"

@@ -82,6 +82,8 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
         binding.etSearch.setSelection(binding.etSearch.text?.length ?: 0)
         binding.etSearch.doOnTextChanged { text, _, _, _ ->
             viewModel.setSearchQuery(text?.toString().orEmpty())
+            if (_binding != null) updateEmptyText()
+
         }
         binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -171,7 +173,6 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
                     adapter.submitList(list)
                     val hasItems = list.isNotEmpty()
                     binding.rvTasks.isVisible = hasItems
-                    binding.imgBackdrop.isVisible = hasItems
                     binding.emptyState.root.isVisible = !hasItems
                     if (!hasItems) updateEmptyText()
                 }

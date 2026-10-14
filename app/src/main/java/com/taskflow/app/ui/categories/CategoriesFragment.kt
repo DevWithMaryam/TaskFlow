@@ -83,7 +83,6 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
                     adapter.submitList(list)
                     val hasItems = list.isNotEmpty()
                     binding.rvCategories.isVisible = hasItems
-                    binding.imgBackdrop.isVisible = hasItems
                     binding.fabAddCategory.isVisible = hasItems
                     binding.emptyState.root.isVisible = !hasItems
                 }
