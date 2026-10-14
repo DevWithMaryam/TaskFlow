@@ -69,4 +69,13 @@
         <item name="checkedIconTint">@color/tf_on_priority</item>
         <item name="chipMinHeight">40dp</item>
     </style>
+
+    <style name="TextAppearance.TaskFlow.FilterLabel" parent="">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.06</item>
+        <item name="android:textColor">@color/tf_on_surface_variant</item>
+    </style>
+
 </resources>

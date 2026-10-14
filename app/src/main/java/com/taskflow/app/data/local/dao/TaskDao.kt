@@ -68,6 +68,35 @@ interface TaskDao {
     )
     fun observeSearch(query: String): Flow<List<TaskWithCategory>>
 
+    /**
+     * Filter. Har shart ka matlab: "yeh filter band hai ya task usse match karta hai".
+     * status: 0 = All, 1 = Pending, 2 = Completed
+     * dueMode: 0 = All, 1 = Today, 2 = Upcoming (kal ya us ke baad)
+     * categoryId: -1 = saari categories
+     */
+    @Query(
+        """SELECT t.*, c.name AS categoryName
+           FROM tasks t LEFT JOIN categories c ON t.categoryId = c.id
+           WHERE (:status = 0
+                  OR (:status = 1 AND t.isCompleted = 0)
+                  OR (:status = 2 AND t.isCompleted = 1))
+             AND (:filterByPriority = 0 OR t.priority IN (:priorities))
+             AND (:categoryId = -1 OR t.categoryId = :categoryId)
+             AND (:dueMode = 0
+                  OR (:dueMode = 1 AND t.dueDate >= :todayStart AND t.dueDate < :tomorrowStart)
+                  OR (:dueMode = 2 AND t.dueDate >= :tomorrowStart))
+           ORDER BY t.isCompleted ASC, t.id DESC"""
+    )
+    fun observeFiltered(
+        status: Int,
+        filterByPriority: Int,
+        priorities: List<String>,
+        categoryId: Long,
+        dueMode: Int,
+        todayStart: Long,
+        tomorrowStart: Long
+    ): Flow<List<TaskWithCategory>>
+
     // ---- Counts (sirf pending tasks) ----
 
     @Query(

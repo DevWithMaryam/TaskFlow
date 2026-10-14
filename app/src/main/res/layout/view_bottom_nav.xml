@@ -41,16 +41,34 @@
             android:layout_height="64dp"
             android:layout_weight="1" />
 
-        <ImageButton
-            android:id="@+id/navFilter"
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/nav_filter"
-            android:padding="18dp"
-            android:src="@drawable/ic_filter"
-            app:tint="@color/tf_nav_icon" />
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/navFilter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/nav_filter"
+                android:padding="18dp"
+                android:src="@drawable/ic_filter"
+                app:tint="@color/tf_nav_icon" />
+
+            <!-- Filter lagi ho to yeh chhota nishan dikhta hai -->
+            <View
+                android:id="@+id/filterBadge"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_badge_dot"
+                android:focusable="false"
+                android:importantForAccessibility="no"
+                android:visibility="gone" />
+        </FrameLayout>
 
         <ImageButton
             android:id="@+id/navSettings"

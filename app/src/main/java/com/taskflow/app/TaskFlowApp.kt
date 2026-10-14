@@ -1,6 +1,7 @@
 package com.taskflow.app
 
 import android.app.Application
+import com.taskflow.app.data.FilterStore
 import com.taskflow.app.data.local.TaskFlowDatabase
 import com.taskflow.app.data.repository.CategoryRepository
 import com.taskflow.app.data.repository.TaskRepository
@@ -13,6 +14,7 @@ class TaskFlowApp : Application() {
     val database by lazy { TaskFlowDatabase.getInstance(this) }
     val taskRepository by lazy { TaskRepository(database.taskDao()) }
     val categoryRepository by lazy { CategoryRepository(database.categoryDao()) }
+    val filterStore = FilterStore()
 
     override fun onCreate() {
         super.onCreate()

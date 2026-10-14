@@ -8,6 +8,9 @@
         <item name="colorOnSurface">@color/tf_on_surface</item>
         <item name="colorOnSurfaceVariant">@color/tf_on_surface_variant</item>
         <item name="colorOutline">@color/tf_surface_stroke</item>
+        <item name="colorSecondaryContainer">@color/tf_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/tf_on_secondary_container</item>
+        <item name="colorSurfaceContainerLow">@color/tf_surface</item>
         <item name="android:windowBackground">@color/tf_background</item>
 
         <!-- Poori app ka default font Inter -->

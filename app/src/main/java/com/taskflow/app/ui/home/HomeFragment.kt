@@ -19,6 +19,7 @@ import com.taskflow.app.R
 import com.taskflow.app.data.local.model.CategoryWithCount
 import com.taskflow.app.databinding.FragmentHomeBinding
 import com.taskflow.app.ui.categories.CategoriesAdapter
+import com.taskflow.app.ui.filter.FilterBottomSheet
 import com.taskflow.app.ui.tasklist.TaskListArgs
 import com.taskflow.app.util.VerticalSpaceDecoration
 import com.taskflow.app.util.applyNavigationBarPadding
@@ -48,6 +49,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupRows()
         setupCategoryList()
         setupSearch()
+        setupFilter()
         setupBottomNav()
         setupExitDialog()
         observeData()
@@ -100,6 +102,26 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    /** Filter button: bottom sheet kholo, Apply hone par natije kholo. */
+    private fun setupFilter() {
+        binding.bottomNav.navFilter.setOnClickListener {
+            if (childFragmentManager.findFragmentByTag(FilterBottomSheet.TAG) == null) {
+                FilterBottomSheet().show(childFragmentManager, FilterBottomSheet.TAG)
+            }
+        }
+
+        childFragmentManager.setFragmentResultListener(
+            FilterBottomSheet.RESULT_KEY, viewLifecycleOwner
+        ) { _, _ ->
+            val title = if (viewModel.isFilterActiveNow()) {
+                R.string.filtered_tasks_title
+            } else {
+                R.string.all_tasks_title
+            }
+            openTaskList(getString(title), TaskListArgs.TYPE_FILTER)
+        }
+    }
+
     // ---------- Database se data ----------
 
     private fun observeData() {
@@ -132,6 +154,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         binding.tvNoCategories.isVisible = list.isEmpty()
                     }
                 }
+
+                launch {
+                    viewModel.isFilterActive.collect { active ->
+                        binding.bottomNav.filterBadge.isVisible = active
+                    }
+                }
             }
         }
     }
@@ -150,7 +178,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 findNavController().navigate(R.id.action_home_to_addTask)
             }
             // navHome: hum pehle se Home par hain, isliye kuch nahi
-            // navFilter: Phase 9 ma banega
         }
     }
 

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.taskflow.app.TaskFlowApp
+import com.taskflow.app.data.FilterStore
 import com.taskflow.app.data.local.entity.Task
 import com.taskflow.app.data.local.model.TaskWithCategory
 import com.taskflow.app.data.repository.TaskRepository
@@ -26,6 +27,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalCoroutinesApi::class)
 class TaskListViewModel(
     private val repository: TaskRepository,
+    filterStore: FilterStore,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -42,6 +44,8 @@ class TaskListViewModel(
     val tasks: StateFlow<List<TaskWithCategory>?> = when (listType) {
         TaskListArgs.TYPE_TODAY -> repository.observeToday()
         TaskListArgs.TYPE_PLANNED -> repository.observePlanned()
+        TaskListArgs.TYPE_FILTER -> filterStore.filter
+            .flatMapLatest { filter -> repository.filtered(filter) }
         TaskListArgs.TYPE_SEARCH -> _searchQuery
             .map { it.trim() }
             .distinctUntilChanged()
@@ -76,7 +80,7 @@ class TaskListViewModel(
         val Factory = viewModelFactory {
             initializer {
                 val app = this[APPLICATION_KEY] as TaskFlowApp
-                TaskListViewModel(app.taskRepository, createSavedStateHandle())
+                TaskListViewModel(app.taskRepository, app.filterStore, createSavedStateHandle())
             }
         }
     }

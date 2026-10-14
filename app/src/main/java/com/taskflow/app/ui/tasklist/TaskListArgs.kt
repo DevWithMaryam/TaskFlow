@@ -9,4 +9,5 @@ object TaskListArgs {
     const val TYPE_PLANNED = "planned"
     const val TYPE_CATEGORY = "category"
     const val TYPE_SEARCH = "search"
+    const val TYPE_FILTER = "filter"
 }

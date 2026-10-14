@@ -100,4 +100,20 @@
     <string name="search_no_results_title">No tasks found</string>
     <string name="search_no_results_message">Try a different word.</string>
 
+    <string name="filter_title">Filter</string>
+    <string name="filter_status">Status</string>
+    <string name="filter_priority">Priority</string>
+    <string name="filter_category">Category</string>
+    <string name="filter_due_date">Due date</string>
+    <string name="filter_all">All</string>
+    <string name="status_pending">Pending</string>
+    <string name="status_completed">Completed</string>
+    <string name="all_categories">All Categories</string>
+    <string name="due_upcoming">Upcoming</string>
+    <string name="filter_reset">Reset</string>
+    <string name="filter_apply">Apply</string>
+    <string name="filtered_tasks_title">Filtered Tasks</string>
+    <string name="all_tasks_title">All Tasks</string>
+    <string name="filter_no_results_message">Try changing your filters.</string>
+
 </resources>

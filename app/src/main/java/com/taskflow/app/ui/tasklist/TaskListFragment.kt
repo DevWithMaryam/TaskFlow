@@ -27,7 +27,7 @@ import com.taskflow.app.util.applyStatusBarPadding
 import com.taskflow.app.viewmodel.TaskListViewModel
 import kotlinx.coroutines.launch
 
-/** Yeh ek hi screen Today, Planned, Category aur Search, sab ke liye use hoti hai. */
+/** Yeh ek hi screen Today, Planned, Category, Search aur Filter, sab ke liye use hoti hai. */
 class TaskListFragment : Fragment(R.layout.fragment_task_list) {
 
     private var _binding: FragmentTaskListBinding? = null
@@ -35,8 +35,11 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
 
     private val viewModel: TaskListViewModel by viewModels { TaskListViewModel.Factory }
 
-    private val isSearch: Boolean
-        get() = arguments?.getString(TaskListArgs.TYPE) == TaskListArgs.TYPE_SEARCH
+    private val listType: String?
+        get() = arguments?.getString(TaskListArgs.TYPE)
+
+    private val isSearch: Boolean get() = listType == TaskListArgs.TYPE_SEARCH
+    private val isFilter: Boolean get() = listType == TaskListArgs.TYPE_FILTER
 
     private val adapter = TaskAdapter(
         onToggle = { task, done -> viewModel.setCompleted(task.id, done) },
@@ -63,11 +66,7 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
             findNavController().navigateUp()
         }
 
-        binding.emptyState.apply {
-            tvEmptyTitle.setText(R.string.empty_tasks_title)
-            tvEmptyMessage.setText(R.string.empty_tasks_message)
-        }
-
+        updateEmptyText()
         setupList()
         if (isSearch) setupSearch(showKeyboard = savedInstanceState == null)
         observeTasks()
@@ -118,18 +117,30 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
             .hide(WindowInsetsCompat.Type.ime())
     }
 
-    /** Khali list par kya likha aaye: search ma do surtein hain. */
+    /** Khali list par kya likha aaye: search aur filter ke alag messages hain. */
     private fun updateEmptyText() {
-        if (isSearch && viewModel.searchQuery.value.isBlank()) {
-            binding.emptyState.tvEmptyTitle.setText(R.string.search_prompt_title)
-            binding.emptyState.tvEmptyMessage.setText(R.string.search_prompt_message)
-        } else if (isSearch) {
-            binding.emptyState.tvEmptyTitle.setText(R.string.search_no_results_title)
-            binding.emptyState.tvEmptyMessage.setText(R.string.search_no_results_message)
-        } else {
-            binding.emptyState.tvEmptyTitle.setText(R.string.empty_tasks_title)
-            binding.emptyState.tvEmptyMessage.setText(R.string.empty_tasks_message)
+        val title: Int
+        val message: Int
+        when {
+            isSearch && viewModel.searchQuery.value.isBlank() -> {
+                title = R.string.search_prompt_title
+                message = R.string.search_prompt_message
+            }
+            isSearch -> {
+                title = R.string.search_no_results_title
+                message = R.string.search_no_results_message
+            }
+            isFilter -> {
+                title = R.string.search_no_results_title
+                message = R.string.filter_no_results_message
+            }
+            else -> {
+                title = R.string.empty_tasks_title
+                message = R.string.empty_tasks_message
+            }
         }
+        binding.emptyState.tvEmptyTitle.setText(title)
+        binding.emptyState.tvEmptyMessage.setText(message)
     }
 
     // ---------- List ----------

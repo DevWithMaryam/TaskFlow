@@ -2,6 +2,7 @@ package com.taskflow.app.data.repository
 
 import com.taskflow.app.data.local.dao.TaskDao
 import com.taskflow.app.data.local.entity.Task
+import com.taskflow.app.data.local.model.TaskFilter
 import com.taskflow.app.data.local.model.TaskWithCategory
 import com.taskflow.app.util.DateUtils
 import kotlinx.coroutines.flow.Flow
@@ -30,6 +31,18 @@ class TaskRepository(private val taskDao: TaskDao) {
 
     fun search(query: String): Flow<List<TaskWithCategory>> =
         taskDao.observeSearch(query)
+
+    fun filtered(filter: TaskFilter): Flow<List<TaskWithCategory>> =
+        taskDao.observeFiltered(
+            status = filter.status.code,
+            filterByPriority = if (filter.priorities.isEmpty()) 0 else 1,
+            // Khali list SQL ma na jaye, isliye ek bekaar lafz (filter band hoga to use nahi hota)
+            priorities = if (filter.priorities.isEmpty()) listOf("") else filter.priorities.map { it.name },
+            categoryId = filter.categoryId ?: -1L,
+            dueMode = filter.due.code,
+            todayStart = DateUtils.startOfToday(),
+            tomorrowStart = DateUtils.startOfTomorrow()
+        )
 
     fun observeTodayCount(): Flow<Int> =
         taskDao.observePendingCountDueBetween(
