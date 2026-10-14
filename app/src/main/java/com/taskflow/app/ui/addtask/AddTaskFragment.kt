@@ -208,7 +208,8 @@ class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
             }
             if (errors.categoryMissing) {
                 if (categories.isEmpty()) {
-                    Snackbar.make(b.root, R.string.empty_categories_message, Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(b.root, R.string.empty_categories_message, Snackbar.LENGTH_LONG)
+                        .show()
                 } else {
                     b.tilCategory.error = getString(R.string.error_category_required)
                 }
@@ -216,7 +217,8 @@ class AddTaskFragment : Fragment(R.layout.fragment_add_task) {
 
             if (!errors.hasErrors) {
                 ViewCompat.getWindowInsetsController(b.root)?.hide(WindowInsetsCompat.Type.ime())
-                val message = if (viewModel.isEditing) R.string.task_updated else R.string.task_added
+                val message =
+                    if (viewModel.isEditing) R.string.task_updated else R.string.task_added
                 Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 findNavController().navigateUp()
             }

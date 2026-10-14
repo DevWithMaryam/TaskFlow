@@ -43,7 +43,11 @@ object DateUtils {
         local.timeInMillis = localMillis
         val utc = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
         utc.clear()
-        utc.set(local.get(Calendar.YEAR), local.get(Calendar.MONTH), local.get(Calendar.DAY_OF_MONTH))
+        utc.set(
+            local.get(Calendar.YEAR),
+            local.get(Calendar.MONTH),
+            local.get(Calendar.DAY_OF_MONTH)
+        )
         return utc.timeInMillis
     }
 

@@ -37,6 +37,7 @@ class TaskListViewModel(
         savedStateHandle.get<Long>(TaskListArgs.CATEGORY_ID) ?: -1L
 
     private val _searchQuery = MutableStateFlow("")
+
     /** Search box ka text (sirf search mode ma use hota hai). */
     val searchQuery: StateFlow<String> = _searchQuery
 
@@ -46,6 +47,7 @@ class TaskListViewModel(
         TaskListArgs.TYPE_PLANNED -> repository.observePlanned()
         TaskListArgs.TYPE_FILTER -> filterStore.filter
             .flatMapLatest { filter -> repository.filtered(filter) }
+
         TaskListArgs.TYPE_SEARCH -> _searchQuery
             .map { it.trim() }
             .distinctUntilChanged()
@@ -54,6 +56,7 @@ class TaskListViewModel(
                 if (query.isEmpty()) flowOf(emptyList<TaskWithCategory>())
                 else repository.search(query)
             }
+
         else -> repository.observeByCategory(categoryId)
     }.stateIn<List<TaskWithCategory>?>(
         viewModelScope, SharingStarted.WhileSubscribed(5_000), null

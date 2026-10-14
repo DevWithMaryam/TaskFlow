@@ -92,38 +92,47 @@
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="fontFamily">@font/inter_regular</item>
     </style>
+
     <style name="TextAppearance.TaskFlow.Inter.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="fontFamily">@font/inter_regular</item>
     </style>
+
     <style name="TextAppearance.TaskFlow.Inter.BodySmall" parent="TextAppearance.Material3.BodySmall">
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="fontFamily">@font/inter_regular</item>
     </style>
+
     <style name="TextAppearance.TaskFlow.Inter.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
         <item name="android:fontFamily">@font/inter_medium</item>
         <item name="fontFamily">@font/inter_medium</item>
     </style>
+
     <style name="TextAppearance.TaskFlow.Inter.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
         <item name="android:fontFamily">@font/inter_medium</item>
         <item name="fontFamily">@font/inter_medium</item>
     </style>
+
     <style name="TextAppearance.TaskFlow.Inter.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
         <item name="android:fontFamily">@font/inter_medium</item>
         <item name="fontFamily">@font/inter_medium</item>
     </style>
+
     <style name="TextAppearance.TaskFlow.Inter.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="fontFamily">@font/inter_regular</item>
     </style>
+
     <style name="TextAppearance.TaskFlow.Inter.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
         <item name="android:fontFamily">@font/inter_medium</item>
         <item name="fontFamily">@font/inter_medium</item>
     </style>
+
     <style name="TextAppearance.TaskFlow.Inter.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
         <item name="android:fontFamily">@font/inter_medium</item>
         <item name="fontFamily">@font/inter_medium</item>
     </style>
+
     <style name="TextAppearance.TaskFlow.Inter.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="fontFamily">@font/inter_regular</item>

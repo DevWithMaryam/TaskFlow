@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Main app theme. Light/Dark ke colors values-night/colors.xml se khud aate hain -->
     <style name="Base.Theme.TaskFlow" parent="Theme.Material3.DayNight.NoActionBar">
@@ -21,12 +21,16 @@
         <item name="textAppearanceBodyMedium">@style/TextAppearance.TaskFlow.Inter.BodyMedium</item>
         <item name="textAppearanceBodySmall">@style/TextAppearance.TaskFlow.Inter.BodySmall</item>
         <item name="textAppearanceLabelLarge">@style/TextAppearance.TaskFlow.Inter.LabelLarge</item>
-        <item name="textAppearanceLabelMedium">@style/TextAppearance.TaskFlow.Inter.LabelMedium</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.TaskFlow.Inter.LabelMedium
+        </item>
         <item name="textAppearanceLabelSmall">@style/TextAppearance.TaskFlow.Inter.LabelSmall</item>
         <item name="textAppearanceTitleLarge">@style/TextAppearance.TaskFlow.Inter.TitleLarge</item>
-        <item name="textAppearanceTitleMedium">@style/TextAppearance.TaskFlow.Inter.TitleMedium</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.TaskFlow.Inter.TitleMedium
+        </item>
         <item name="textAppearanceTitleSmall">@style/TextAppearance.TaskFlow.Inter.TitleSmall</item>
-        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.TaskFlow.Inter.HeadlineSmall</item>
+        <item name="textAppearanceHeadlineSmall">
+            @style/TextAppearance.TaskFlow.Inter.HeadlineSmall
+        </item>
     </style>
 
     <style name="Theme.TaskFlow" parent="Base.Theme.TaskFlow" />

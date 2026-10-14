@@ -128,14 +128,17 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
                 title = R.string.search_prompt_title
                 message = R.string.search_prompt_message
             }
+
             isSearch -> {
                 title = R.string.search_no_results_title
                 message = R.string.search_no_results_message
             }
+
             isFilter -> {
                 title = R.string.search_no_results_title
                 message = R.string.filter_no_results_message
             }
+
             else -> {
                 title = R.string.empty_tasks_title
                 message = R.string.empty_tasks_message

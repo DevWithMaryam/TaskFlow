@@ -138,6 +138,7 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
                         SaveResult.SUCCESS -> dialog.dismiss()
                         SaveResult.EMPTY ->
                             dialogBinding.tilName.error = getString(R.string.error_name_empty)
+
                         SaveResult.DUPLICATE ->
                             dialogBinding.tilName.error = getString(R.string.error_name_exists)
                     }
