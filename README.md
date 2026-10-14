@@ -3,6 +3,12 @@
 A clean, offline-first to-do app for Android. Organize tasks into your own categories, set priorities and optional due dates, and find anything quickly with search and filters.
 
 > "Organize your day, one task at a time."
+> ## Live Demo
+
+Try TaskFlow instantly in your browser — no install needed:
+
+🔗 **[Launch Live Demo on Appetize.io](https://appetize.io/app/b_qtbikiw3ebcnp6g4zecimhtutu)**
+
 
 <!-- Screenshots: add your files to docs/screenshots/ and update the names below -->
 | Home | Task list | Categories |
