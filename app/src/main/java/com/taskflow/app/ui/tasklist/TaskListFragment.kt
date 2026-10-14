@@ -2,8 +2,12 @@ package com.taskflow.app.ui.tasklist
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.core.os.bundleOf
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -12,6 +16,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.taskflow.app.R
 import com.taskflow.app.databinding.FragmentTaskListBinding
@@ -22,7 +27,7 @@ import com.taskflow.app.util.applyStatusBarPadding
 import com.taskflow.app.viewmodel.TaskListViewModel
 import kotlinx.coroutines.launch
 
-/** Yeh ek hi screen Today, Planned aur Category, sab ke liye use hoti hai. */
+/** Yeh ek hi screen Today, Planned, Category aur Search, sab ke liye use hoti hai. */
 class TaskListFragment : Fragment(R.layout.fragment_task_list) {
 
     private var _binding: FragmentTaskListBinding? = null
@@ -30,9 +35,13 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
 
     private val viewModel: TaskListViewModel by viewModels { TaskListViewModel.Factory }
 
+    private val isSearch: Boolean
+        get() = arguments?.getString(TaskListArgs.TYPE) == TaskListArgs.TYPE_SEARCH
+
     private val adapter = TaskAdapter(
         onToggle = { task, done -> viewModel.setCompleted(task.id, done) },
         onClick = { task ->
+            hideKeyboard()
             findNavController().navigate(
                 R.id.action_taskList_to_addTask,
                 bundleOf("taskId" to task.id)
@@ -49,7 +58,10 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
 
         binding.header.tvTitle.text =
             arguments?.getString(TaskListArgs.TITLE) ?: getString(R.string.default_list_title)
-        binding.header.btnBack.setOnClickListener { findNavController().navigateUp() }
+        binding.header.btnBack.setOnClickListener {
+            hideKeyboard()
+            findNavController().navigateUp()
+        }
 
         binding.emptyState.apply {
             tvEmptyTitle.setText(R.string.empty_tasks_title)
@@ -57,8 +69,70 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
         }
 
         setupList()
+        if (isSearch) setupSearch(showKeyboard = savedInstanceState == null)
         observeTasks()
     }
+
+    // ---------- Search ----------
+
+    private fun setupSearch(showKeyboard: Boolean) {
+        binding.tilSearch.isVisible = true
+
+        // Phone ghumane ya wapas aane par pehle wala text rahe
+        binding.etSearch.setText(viewModel.searchQuery.value)
+        binding.etSearch.setSelection(binding.etSearch.text?.length ?: 0)
+        binding.etSearch.doOnTextChanged { text, _, _, _ ->
+            viewModel.setSearchQuery(text?.toString().orEmpty())
+        }
+        binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                hideKeyboard()
+                true
+            } else {
+                false
+            }
+        }
+
+        // List scroll karne par keyboard hat jaye
+        binding.rvTasks.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(rv: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) hideKeyboard()
+            }
+        })
+
+        if (showKeyboard) {
+            binding.etSearch.requestFocus()
+            binding.etSearch.post {
+                _binding?.let {
+                    WindowCompat.getInsetsController(requireActivity().window, it.etSearch)
+                        .show(WindowInsetsCompat.Type.ime())
+                }
+            }
+        }
+    }
+
+    private fun hideKeyboard() {
+        val b = _binding ?: return
+        if (!isSearch) return
+        WindowCompat.getInsetsController(requireActivity().window, b.etSearch)
+            .hide(WindowInsetsCompat.Type.ime())
+    }
+
+    /** Khali list par kya likha aaye: search ma do surtein hain. */
+    private fun updateEmptyText() {
+        if (isSearch && viewModel.searchQuery.value.isBlank()) {
+            binding.emptyState.tvEmptyTitle.setText(R.string.search_prompt_title)
+            binding.emptyState.tvEmptyMessage.setText(R.string.search_prompt_message)
+        } else if (isSearch) {
+            binding.emptyState.tvEmptyTitle.setText(R.string.search_no_results_title)
+            binding.emptyState.tvEmptyMessage.setText(R.string.search_no_results_message)
+        } else {
+            binding.emptyState.tvEmptyTitle.setText(R.string.empty_tasks_title)
+            binding.emptyState.tvEmptyMessage.setText(R.string.empty_tasks_message)
+        }
+    }
+
+    // ---------- List ----------
 
     private fun setupList() {
         binding.rvTasks.apply {
@@ -88,6 +162,7 @@ class TaskListFragment : Fragment(R.layout.fragment_task_list) {
                     binding.rvTasks.isVisible = hasItems
                     binding.imgBackdrop.isVisible = hasItems
                     binding.emptyState.root.isVisible = !hasItems
+                    if (!hasItems) updateEmptyText()
                 }
             }
         }

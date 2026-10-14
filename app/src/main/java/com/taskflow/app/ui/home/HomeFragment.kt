@@ -47,6 +47,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         setupRows()
         setupCategoryList()
+        setupSearch()
         setupBottomNav()
         setupExitDialog()
         observeData()
@@ -89,6 +90,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             addItemDecoration(
                 VerticalSpaceDecoration(resources.getDimensionPixelSize(R.dimen.list_item_gap))
             )
+        }
+    }
+
+    /** Search icon: wohi Task List screen, search mode ma. */
+    private fun setupSearch() {
+        binding.btnSearch.setOnClickListener {
+            openTaskList(getString(R.string.search), TaskListArgs.TYPE_SEARCH)
         }
     }
 

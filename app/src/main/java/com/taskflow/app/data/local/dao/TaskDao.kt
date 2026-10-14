@@ -55,6 +55,19 @@ interface TaskDao {
     )
     fun observeByCategory(categoryId: Long): Flow<List<TaskWithCategory>>
 
+    /**
+     * Search: title ya description ma woh lafz maujood ho (chhote/bare English letters ka farq nahi).
+     * instr() use kiya hai taake % ya _ jaise nishan likhne par bhi ghalat natije na aayen.
+     */
+    @Query(
+        """SELECT t.*, c.name AS categoryName
+           FROM tasks t LEFT JOIN categories c ON t.categoryId = c.id
+           WHERE instr(LOWER(t.title), LOWER(:query)) > 0
+              OR instr(LOWER(IFNULL(t.description, '')), LOWER(:query)) > 0
+           ORDER BY t.isCompleted ASC, t.id DESC"""
+    )
+    fun observeSearch(query: String): Flow<List<TaskWithCategory>>
+
     // ---- Counts (sirf pending tasks) ----
 
     @Query(

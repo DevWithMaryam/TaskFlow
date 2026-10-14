@@ -28,6 +28,9 @@ class TaskRepository(private val taskDao: TaskDao) {
     fun observeByCategory(categoryId: Long): Flow<List<TaskWithCategory>> =
         taskDao.observeByCategory(categoryId)
 
+    fun search(query: String): Flow<List<TaskWithCategory>> =
+        taskDao.observeSearch(query)
+
     fun observeTodayCount(): Flow<Int> =
         taskDao.observePendingCountDueBetween(
             DateUtils.startOfToday(), DateUtils.startOfTomorrow()

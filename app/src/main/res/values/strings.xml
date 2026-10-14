@@ -94,4 +94,10 @@
         <item quantity="other">Today you have %d tasks</item>
     </plurals>
 
+    <string name="search_hint">Search tasks</string>
+    <string name="search_prompt_title">Search your tasks</string>
+    <string name="search_prompt_message">Type a word to search task titles and descriptions.</string>
+    <string name="search_no_results_title">No tasks found</string>
+    <string name="search_no_results_message">Try a different word.</string>
+
 </resources>
