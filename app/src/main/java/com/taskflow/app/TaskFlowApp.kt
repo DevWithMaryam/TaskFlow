@@ -5,6 +5,7 @@ import com.taskflow.app.data.FilterStore
 import com.taskflow.app.data.local.TaskFlowDatabase
 import com.taskflow.app.data.repository.CategoryRepository
 import com.taskflow.app.data.repository.TaskRepository
+import com.taskflow.app.util.ThemeManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +19,8 @@ class TaskFlowApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        // Saved theme sab se pehle lago, taake pehli screen bhi sahi rang ma khule
+        ThemeManager.applySaved(this)
         // Database ko background ma pehle hi bana lo, taake pehli screen par der na lage
         CoroutineScope(Dispatchers.IO).launch { database.openHelper.writableDatabase }
     }

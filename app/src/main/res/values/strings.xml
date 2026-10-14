@@ -116,4 +116,15 @@
     <string name="all_tasks_title">All Tasks</string>
     <string name="filter_no_results_message">Try changing your filters.</string>
 
+    <string name="theme_dialog_title">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_system">System Default</string>
+    <string name="language_dialog_title">Language</string>
+    <string name="feedback_subject">TaskFlow App Feedback</string>
+    <string name="no_email_app">No email app found</string>
+    <string name="share_chooser_title">Share TaskFlow</string>
+    <string name="share_text">Organize your day, one task at a time. Try TaskFlow: %1$s</string>
+
+
 </resources>
